@@ -1,0 +1,24 @@
+https://towardsai.net/p/systems/observer-pattern-vs-pub-sub-pattern
+
+https://en-m-wikipedia-org.translate.goog/wiki/Publish%E2%80%93subscribe_pattern?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=nui
+
+
+Patrón Editor-Suscripción (Pub-Sub)
+El patrón editor-suscriptor se puede considerar como una versión mejorada
+(asincrónica y poco acoplada) del patrón del observador.
+En el patrón pub-sub, los remitentes de mensajes (denominados editores) ** no envían mensajes directamente **
+a receptores específicos (denominados suscriptores). Existe un componente intermedio, llamado intermediario
+(o intermediario de mensajes, bus de eventos), al que el editor envía los datos y desde donde
+los suscriptores reciben los datos. Filtra todos los mensajes entrantes y los distribuye en consecuencia.
+Los métodos populares de filtrado de mensajes se basan en temas y en contenido.
+
+En la arquitectura de software, publicar-suscribirse es un patrón de mensajería en el que
+los remitentes de mensajes, denominados editores, no programan los mensajes para que se envíen
+directamente a receptores específicos, denominados suscriptores, sino que clasifican los
+mensajes publicados en clases sin saber qué suscriptores, si los hay, puede haber.
+Del mismo modo, los suscriptores expresan interés en una o más clases y solo reciben mensajes que son de su interés,
+sin saber qué editores, si los hay, los hay.
+
+Publish-subscribe es un hermano del paradigma de la cola de mensajes y, por lo general, es una parte de
+un sistema de middleware orientado a mensajes más grande. La mayoría de los sistemas de mensajería son
+compatibles con los modelos pub / sub y de cola de mensajes en su API ; por ejemplo, Java Message Service (JMS).
