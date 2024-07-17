@@ -1,0 +1,2 @@
+Se presenta la solución completa de este ejercicio con py_object de Python.
+Es muy fácil hacer la adaptación para trabajar con listas de Python.
