@@ -1,0 +1,63 @@
+@startuml classes
+set namespaceSeparator none
+class "Alarma" as alarma-v1.Alarma {
+  {abstract}hay_intrusion()
+}
+class "Alarma" as alarma-v2.Alarma {
+  {abstract}hay_intrusion()
+}
+class "AlarmaCompleta" as alarma-v1.AlarmaCompleta {
+  hay_intrusion()
+}
+class "AlarmaCompleta" as alarma-v2.AlarmaCompleta {
+  hay_intrusion()
+}
+class "AlarmaLuminosa" as alarma-v1.AlarmaLuminosa {
+  hay_intrusion()
+}
+class "AlarmaLuminosa" as alarma-v2.AlarmaLuminosa {
+  hay_intrusion()
+}
+class "AlarmaSonora" as alarma-v1.AlarmaSonora {
+  hay_intrusion()
+}
+class "AlarmaSonora" as alarma-v2.AlarmaSonora {
+  hay_intrusion()
+}
+class "Luz" as alarma-v1.Luz {
+  apagar()
+  encender()
+}
+class "Luz" as alarma-v2.Luz {
+  apagar()
+  encender()
+}
+class "Sensor" as alarma-v1.Sensor {
+  intrusion() -> int
+}
+class "Sensor" as alarma-v2.Sensor {
+  intrusion() -> int
+}
+class "Timbre" as alarma-v1.Timbre {
+  apagar()
+  encender()
+}
+class "Timbre" as alarma-v2.Timbre {
+  apagar()
+  encender()
+}
+alarma-v1.AlarmaCompleta --|> alarma-v1.AlarmaLuminosa
+alarma-v1.AlarmaCompleta --|> alarma-v1.AlarmaSonora
+alarma-v1.AlarmaLuminosa --|> alarma-v1.Alarma
+alarma-v1.AlarmaSonora --|> alarma-v1.Alarma
+alarma-v2.AlarmaCompleta --|> alarma-v2.AlarmaLuminosa
+alarma-v2.AlarmaCompleta --|> alarma-v2.AlarmaSonora
+alarma-v2.AlarmaLuminosa --|> alarma-v2.Alarma
+alarma-v2.AlarmaSonora --|> alarma-v2.Alarma
+alarma-v1.Luz --* alarma-v1.AlarmaLuminosa : _luz
+alarma-v1.Sensor --* alarma-v1.Alarma : _sensor
+alarma-v1.Timbre --* alarma-v1.AlarmaSonora : _timbre
+alarma-v2.Luz --* alarma-v2.AlarmaLuminosa : _luz
+alarma-v2.Sensor --* alarma-v2.Alarma : _sensor
+alarma-v2.Timbre --* alarma-v2.AlarmaSonora : _timbre
+@enduml

@@ -1,0 +1,15 @@
+@startuml classes
+set namespaceSeparator none
+class "Cliente" as Cuentas.Clientes.Cliente.Cliente {
+}
+class "CuentaBase" as Cuentas.Cuentas.CuentaBase.CuentaBase {
+  depositar(cantidad)
+  retirar(cantidad)
+}
+class "CuentaBaseAhorro" as Cuentas.Cuentas.CuentaTipo.CuentaAhorro.CuentaBaseAhorro {
+}
+class "CuentaBaseCredito" as Cuentas.Cuentas.CuentaTipo.CuentaCredito.CuentaBaseCredito {
+}
+class "DNI" as Cuentas.Identificadores.DNI.DNI {
+}
+@enduml

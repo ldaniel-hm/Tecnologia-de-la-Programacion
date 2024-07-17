@@ -1,0 +1,49 @@
+@startuml classes
+set namespaceSeparator none
+class "Calendar" as Calendar {
+  months : tuple # Los días de cada mes
+
+  __day
+  __month
+  __year
+
+  leapyear(y) # Comprueba si year es bisiesto
+  advance() # Avanza un día
+
+}
+class "CalendarClock" as CalendarClock {
+}
+class "Clock" as Clock {
+  __hours
+  __minutes
+  __seconds
+
+  tictac() # Avanza un segundo
+}
+
+
+
+
+Calendar <|-- CalendarClock
+Clock <|-- CalendarClock
+
+
+note as N1
+
+    x = CalendarClock(1, 1, 65)
+    print(x)
+
+    // Avanza 30 minutos
+    for i in range(1800): # 30*60 = 1800
+        x.tictac()
+
+    // Avanza 365 días
+    for i in range(365):
+        x.advance()
+
+    print(x)
+
+end note
+
+
+@enduml

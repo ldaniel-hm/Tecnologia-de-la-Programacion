@@ -1,0 +1,47 @@
+@startuml classes
+set namespaceSeparator none
+
+
+
+class "Agente" as Agente1 {
+}
+class "Decision" as AgenteDecision1 {
+}
+class "Body" as Body1 {
+}
+
+Agente1 *- AgenteDecision1 : __decision
+Body1 -* Agente1 : __body
+
+
+
+
+
+class "Agente" as Agente2 {
+}
+class "Decision" as AgenteDecision2 {
+   __decision
+}
+class "Body" as Body2 {
+}
+
+
+AgenteDecision2 <|-- Agente2
+Body2 -* Agente2 : __body
+
+
+
+
+
+class "Agente" as Agente3 {
+}
+class "Body" as Body3 {
+  __body
+}
+class "Decision" as AgenteDecision3 {
+  __decision
+}
+
+Body3 <|-- Agente3
+AgenteDecision3 <|-- Agente3
+@enduml

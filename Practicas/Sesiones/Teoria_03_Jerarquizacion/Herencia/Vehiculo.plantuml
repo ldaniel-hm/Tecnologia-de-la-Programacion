@@ -1,0 +1,13 @@
+@startuml classes
+
+class "Vehiculo" as Vehiculo {
+}
+
+class "Electrico" as Electrico {
+  __init__(marca: str, pvp, float, carga: int, compra: str)
+}
+
+
+
+Vehiculo <|-- Electrico
+@enduml

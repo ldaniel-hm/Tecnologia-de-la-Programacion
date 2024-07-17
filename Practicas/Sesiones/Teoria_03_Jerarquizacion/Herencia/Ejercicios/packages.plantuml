@@ -1,0 +1,33 @@
+@startuml packages
+set namespaceSeparator none
+package "Cuentas" as Cuentas {
+}
+package "Cuentas.Clientes" as Cuentas.Clientes {
+}
+package "Cuentas.Clientes.Cliente" as Cuentas.Clientes.Cliente {
+}
+package "Cuentas.Cuentas" as Cuentas.Cuentas {
+}
+package "Cuentas.Cuentas.CuentaBase" as Cuentas.Cuentas.CuentaBase {
+}
+package "Cuentas.Cuentas.CuentaTipo" as Cuentas.Cuentas.CuentaTipo {
+}
+package "Cuentas.Cuentas.CuentaTipo.CuentaAhorro" as Cuentas.Cuentas.CuentaTipo.CuentaAhorro {
+}
+package "Cuentas.Cuentas.CuentaTipo.CuentaCredito" as Cuentas.Cuentas.CuentaTipo.CuentaCredito {
+}
+package "Cuentas.Identificadores" as Cuentas.Identificadores {
+}
+package "Cuentas.Identificadores.DNI" as Cuentas.Identificadores.DNI {
+}
+package "Cuentas.main" as Cuentas.main {
+}
+Cuentas.Clientes.Cliente --> Cuentas
+Cuentas.Cuentas.CuentaTipo.CuentaAhorro --> Cuentas
+Cuentas.Cuentas.CuentaTipo.CuentaCredito --> Cuentas
+Cuentas.main --> Cuentas.Clientes.Cliente
+Cuentas.main --> Cuentas.Cuentas.CuentaBase
+Cuentas.main --> Cuentas.Cuentas.CuentaTipo.CuentaAhorro
+Cuentas.main --> Cuentas.Cuentas.CuentaTipo.CuentaCredito
+Cuentas.main --> Cuentas.Identificadores.DNI
+@enduml

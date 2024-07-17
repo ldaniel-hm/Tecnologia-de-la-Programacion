@@ -1,0 +1,9 @@
+@startuml packages
+set namespaceSeparator none
+package "EjerciciosResueltos.Teoria - 03 - Jerarquizacion.Herencia.Ejercicios.Alarma" as EjerciciosResueltos.Teoria - 03 - Jerarquizacion.Herencia.Ejercicios.Alarma {
+}
+package "EjerciciosResueltos.Teoria - 03 - Jerarquizacion.Herencia.Ejercicios.Alarma.alarma-v1" as EjerciciosResueltos.Teoria - 03 - Jerarquizacion.Herencia.Ejercicios.Alarma.alarma-v1 {
+}
+package "EjerciciosResueltos.Teoria - 03 - Jerarquizacion.Herencia.Ejercicios.Alarma.alarma-v2" as EjerciciosResueltos.Teoria - 03 - Jerarquizacion.Herencia.Ejercicios.Alarma.alarma-v2 {
+}
+@enduml
