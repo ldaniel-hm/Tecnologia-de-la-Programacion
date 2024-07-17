@@ -1,0 +1,27 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+\begin{definition}[Grafo]{}\label{def:Grafo}
+
+Un grafo  (Graph) representa a un par $(V, R)$ siendo $V$ un conjunto de elementos y $R\subset V\times V$.
+Si $(u, v)\in R$ se dice que hay un arco de $u$ a $v$. Un arco puede tener asociado un coste $c_{u, v}\in \mathbb{R}$.
+
+\begin{itemize}
+\item \cm[black]{Graph() : Graph}. Crea un nuevo grafo, inicialmente vacío.
+
+
+\item \cm[black]{appendVertex(v)}. Añade un nuevo vértice al grafo,.
+
+\item \cm[black]{appendArc(u, v, c)}. Añade un nuevo arco $(u, v)$ con un peso  $c=c_{u, v}$. Si el arco ya existe, modifica su coste actual por el valor $c$.
+
+\item \cm[black]{removeVertex(v) : None}. Elimina el vérice \cm[black]{v} del grafo, junto con todos los arcos que lo contengan. Lanza un error si el elemento no existe.
+
+\item \cm[black]{removeArc(u, v) : None}. Elimina el arco $(u, v)$ del grafo, junto con todos los arcos que lo contengan. Lanza un error si el elemento no existe.
+
+\item \cm[black]{len() : int}. Retorna el número de vértices del grafo.
+
+\item \cm[black]{contains(element) : bool}. Indica si el elemento \cm[black]{element} se encuentra en el conjunto de vértices. Retorna \cm{True} si está contenido y \cm{False} si no está contenido.
+
+\end{itemize}
+\end{definition}
+

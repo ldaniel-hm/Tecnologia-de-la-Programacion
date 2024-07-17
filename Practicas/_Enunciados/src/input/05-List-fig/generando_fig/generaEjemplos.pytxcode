@@ -1,0 +1,49 @@
+=>PYTHONTEX#py#default#default#0#code#####15#
+from lolviz import *
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+head = Node('A')
+#g=objviz(head) #, orientation="LR")  # RL
+g=callsviz(varnames=['head'])
+g.render("salida1",format="png")
+nuevo = Node('B')
+g=callsviz(varnames=['head', 'nuevo'])
+g.render("salida2",format="png")
+head.next = nuevo
+#g=objviz(nuevo)
+g=callsviz(varnames=['head', 'nuevo'], orientation="RL")
+g.render("salida3",format="png")
+head = nuevo
+#g=objviz(head)
+g=callsviz(varnames=['head', 'nuevo'])
+g.render("salida4",format="png")
+g.view()  # HAY QUE PONER ESTA INSTRUCCIÓN. SE GARANTICE QUE SE CREA TODO.
+=>PYTHONTEX:SETTINGS#
+version=0.18
+outputdir=pythontex-files-generaEjemplos
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

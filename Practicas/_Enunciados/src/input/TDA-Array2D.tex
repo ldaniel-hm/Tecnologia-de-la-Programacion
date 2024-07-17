@@ -1,0 +1,26 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+\begin{definition}[TDA Array 2D]{}\label{def:TDAArray2D}
+
+Un array 2-dimensional es una colección de elemento contiguos cuyos elementos están identificados por dos enteros únicos. El primer índice se llama \textit{índice fila} y el segundo \textit{índice columna}  y para ambos su primer valor es el $0$. Una vez creado el array, su tamaño no puede cambiarse.
+\begin{itemize}
+\item \cm[black]{Array2D(ncols1, ncols2, ...)}: Crea un array 2-dimensional que constará de \cm[black]{nrows}-índices fila dado por el número de argumentos dados y \cm[black]{ncols1}-índices columna para la primera fila,  \cm[black]{ncols2}-índices columna para la segunda fila, etc. Todos los datos se inicializarán a \cm[black]{None}. Se requiere que cada valor \cm[black]{ncols}$>0$.
+
+\item \cm[black]{numRows()}: Retorna el número de filas del array.
+
+\item \cm[black]{numCols(row)}: Retorna el número de columnas del array para la fila \cm[black]{row}.
+
+\item \cm[black]{getItem(i, j)}: Retorna el valor almacenado en la posición \cm[black]{[i, j]}. Los argumentos de los índices debe tomar valores dentro de sus rangos válidos.
+
+\item \cm[black]{setItem(i, j, value)}: Sustituye el elemento \cm[black]{[i, j]} del array por \cm[black]{value}. Los argumentos de los índices debe tomar valores dentro de sus rangos válidos.
+
+\item \cm[black]{clear(value)}: Limpia el array asignando a todas las posiciones el valor \cm[black]{value}.
+
+\item \cm[black]{iterator()}: Crea y retorna un iterador para el array.
+\end{itemize}
+Tenga en cuenta en la implementación las particularidades de Python.
+\end{definition}
+
+
+

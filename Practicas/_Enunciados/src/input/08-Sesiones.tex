@@ -1,0 +1,251 @@
+% !TEX root = ../Sesiones-TDA-Ejercicios.tex
+
+
+
+
+\end{document}
+
+
+\etocsetnexttocdepth{3}
+\etocsettocstyle{\hrule \vskip 0.15cm \subsubsection*{Índice Parcial}\vskip 0cm}{\vskip 0.15cm\hrule}
+\localtableofcontents
+
+\
+
+\
+
+\textbf{Metodología General:}
+
+\begin{itemize}
+\item El profesor explicará los fundamentos de los TDAs sobre los que se trabajará en cada sesión, si fuera necesario.
+\item Los miembros del grupo se repartirán las tareas a realizar.
+\item Cada uno desarrollará la parte que le haya sido asignada.
+\item Finalizada la parte asignada, le explicará al otro miembro del grupo todo lo que ha realizado con la máxima exactitud posible, justificando las decisiones adoptadas para llegar a la solución del ejercicio.
+\item En la medida de lo posible, los miembros del grupo no deberían trabajar sobre la misma tarea salvo que alguno de los miembros no sepa cómo seguir y necesitara ayuda para continuar.
+\item Ello no significa que cada uno trabaje por su cuenta pues cada miembro del grupo siempre debe rendir cuentas del trabajo que esté realizando.
+\end{itemize}
+
+
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Sesión Práctica 1 }
+\addcontentsline{toc}{section}{Sesión Práctica 1} 
+
+\begin{enumerate}% [label=\sc{Paso} \arabic*.]
+
+\item 
+El profesor te explicará todo lo referente a la programación estructurada en Python (pág. \pageref{subsec:ProgramacionEstructurada}), así como la construcción de funciones (pág. \pageref{subsec:ProgramacionProcedimental}) (en su versión más simple) y construcción de clases en Python (pág. \pageref{subsec:ClasesEnPython}), para que lo compares con Processing y empezar a programar en esta misma sesión. 
+
+\item 
+El profesor te explicará todo lo referente a la creación de un nuevo proyecto en PyCharm (pág. \pageref{subsec:SesionPyCharm}) para crear un proyecto llamado \texttt{SesionesPracticas}. Presta especial atención al significado de entorno virtual. 
+
+\item Construye en el proyecto la  estructura \directory{SesionesPracticas/SesionP1} y desarrolla todo lo que viene a continuación en \directory{SesionP1}.
+
+
+\item Crearéis el fichero \directory{SesionP1/EjemDepuracion.py} con el siguiente contenido para aprender a ejecutar y a depurar un fichero Python en PyCharm.
+
+\begin{pyverbatim}[][frame=single, numbers=left, numbersep=2pt]
+def es_par(numero: int) -> bool:
+    if numero % 2 == 0:
+        return True
+    else:
+        return False
+
+
+def suma_pares(lista_numeros: list) -> int:
+    suma: int = 0
+    pos: int = 0
+    while pos < len(lista_numeros):
+        if es_par(lista_numeros[pos]):
+            suma += lista_numeros[pos]
+        pos += 1
+    return suma
+
+
+numeros: list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+resultado_suma_pares: int = suma_pares(numeros)
+print(f"La suma de los números pares en la lista es {resultado_suma_pares}")
+
+\end{pyverbatim}
+
+Aprende bien lo siguiente: crear y borrar puntos de corte, \textit{Resume Program}, \textit{Step Over}, \textit{Step Into My Code}, \textit{Step Out} y evaluar expresiones. Para ello sigue los siguientes pasos:
+
+\begin{enumerate}[label=\arabic*)]
+\item Marca como breakpoints la línea 12 y selecciona 'Debug EjemDepuracion'. Se mostrará la ventana 'Threads \& Variables'.
+\item ¿Qué variables se muestran y cuáles son sus valores? Despliega los valores de {\tt lista\_numeros}.
+\item ¿Cuanto vale {\tt len(lista\_numeros)}? Usa el campo 'Evaluate expression' y verás el resultado. 
+\item Añade {\tt len(lista\_numeros)} al resto de variables pulsando el símbolo '+' que está a la derecha del campo 'Evaluate expressión'.
+\item Usa \textit{Step Over}: \textit{Pasa por encima} de la línea actual de código y te lleva a la siguiente línea incluso si la línea resaltada tiene llamadas a métodos o funciones. Observa que saltas a la línea 14.
+\item Usa \textit{Resume Program}: Te permite continuar el programa hasta llegar a un nuevo punto de corte. Observa que ejecutas el resto del bucle y te vuelves a parar en la línea 12.
+\item Pon un punto de corte en la línea 2. Y vuelve a ejecutar \textit{Resume Program}. Observa que ahora no te paras en la línea 12, sino en la línea 2. ¿Cuánto vale ahora {\tt len(lista\_numeros)}?
+\item Quita el punto de corte de la línea 12.
+\item Usa \textit{Step Out}: Saldrás de la función actual y le llevará a línea donde se invocó a la función. Observa que se para en la línea 12. Lo entenderás mejora si usa \textit{Resume Program} y después \textit{Step Out}, una y otra vez. Siempre se parará en la línea 12, pero sin tener un punto de corte.
+\item Usa \textit{Step Into}: Funciona igual que \textit{Step Over}, te pasará a la siguiente línea pero ahora el \textit{paso se adentrará} en el método para mostrar lo que sucede en su interior. Utilice esta opción cuando no esté seguro de que el método devuelve un resultado correcto. Pulsa muchas veces esta opción y recorre el bucle while un par de veces (al menos).
+\item \textit{Step Into my Code} es similar a \textit{Step Into} pero con la diferencia de que te permirte concentrarse en tu propio código y evitar que el depurador entre en las clases de las bibliotecas.
+\end{enumerate}
+
+
+
+Recuerda, la \underline{depuración} es una destreza fundamental en programación. Cuando hagas un programa, \textbf{no preguntes al profesor por qué no funciona si antes no lo has depurado} (es decir, haber comprobado el flujo de control y los valores que adoptan las variables)
+
+
+
+\item 
+El profesor te recordará qué es una especificación informal, la función de abstracción y el invariante de la representación. También se te explicará qué es un método mágico y cuándo son invocados. Verás cómo se aplican todos estos conceptos en Python desarrollando el Ejercicio \ref{sec:numerosPositivos} junto con el profesor, para ello crearéis la solución en el fichero \directory{SesionP1/Positivo.py}. 
+
+Recuerda:
+\begin{itemize}
+\item Especificación Informal: Es documentar el código (sección \ref{sec:documentarCodigo}).
+\item Función de abstracción: Usar el TDA adecuado (página \pageref{sec:representacionTDA})
+\item Invariante de la representación: Usar assert/raise (página \pageref{sec:representacionTDA}).
+\end{itemize}
+
+
+\item Desarrolla el Ejercicio \ref{sec:FechaSimplePositivos} con las consideraciones del Ejercicio \ref{sed:TDAFechaSimple}
+
+\item Para seguir con los objetivos de comprender qué es un TDA, su especificación informal, su función de abstracción, su invariante de la representación y su implementación, desarrolla los ejercicios \ref{sec:TDACilindro} y \ref{sec:TDAFraccion}.
+\end{enumerate}
+
+
+
+\
+
+
+\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Sesión Práctica 2 }
+\addcontentsline{toc}{section}{Sesión Práctica 2} 
+
+\begin{enumerate}% [label=\sc{Paso} \arabic*.]
+
+\item El profesor te hará una exposición rápida entre las colecciones secuenciales y no secuenciales, distinguiendo cuáles son mutables y cuáles no. Para cada una de ellas te indicará qué representan, sus constructores y operadores habituales, así como como el uso del \cm{for} para realizar iteraciones sobre estas colecciones.
+Recuerda que:
+
+\begin{itemize}
+\item Memoriza los distintos tipos de contenedores de Python e intenta memorizar la mayor cantidad de métodos y operaciones que se pueden realizar con cada uno.
+
+\item \cm{list(iterable)}, \cm{tuple(iterable)}, \cm{set(iterable)}, \cm{dict(iterable)} realmente no son constructores como tales, sino que se usan como funciones de conversión de forma similar a \cm{int(string)} o \cm{str(numero)}. 
+
+\item Un colección debe inicializarse como una colección vacía y, poco a poco, vamos añadiendo elementos.
+\end{itemize}
+
+\item Muchas colecciones se crean por comprehensión. El profesor te explicará con detenimiento la Construcción de Contenedores por Comprehensión (página \pageref{sec:Comprehension}) y desarrollaréis el Ejercicio \ref{sec:ejercComprehension}.
+
+\item Para trabajar con listas y diccionarios de Python, desarrolla el Ejercicio \ref{sec:estadistica}.
+
+
+\item Utilizando las listas de Python, implementa el TDA Bag. Ejercicio \ref{sec:TDABag}. Llama al fichero \texttt{BagList.py}.
+
+\item Para trabajar con listas, diccionarios y bags, implementa el Ejercicio \ref{sec:anagramas}. Lee antes cómo hacer iteraciones en las colecciones de Python (pág. \pageref{sec:iteracionColecciones}).
+
+\item Para trabajar con conjuntos y diccionarios implementa el Ejercicio \ref{sec:cursosDeTitulo}.
+\end{enumerate}
+
+
+\
+
+
+\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Sesión Práctica 3}
+\addcontentsline{toc}{section}{Sesión Práctica 3} 
+
+\begin{enumerate}% [label=\sc{Paso} \arabic*.]
+
+\item El profesor te explicará qué es un iterador y un iterable, y cómo se implementa en Python.  Como ejemplo, desarrollaréis el Ejercicio \ref{sec:iteradorListas}.
+
+\item El profesor también te explicará como convertir cualquier colección en una colección `indexable' usando los métodos mágicos \cm{\_\_getitem\_\_()} y \cm{\_\_setitem\_\_()}. En este sentido, te recordará qué son los métodos mágicos y te explicará  los fundamentos del ejercicio \ref{sec:datosIndexados}.
+
+
+\item Implementa el tipo de datos array 1D y 2D: ejercicios \ref{sec:arrayUnoD}, \ref{sec:arrayDosD}, 
+
+
+\item Implementa los métodos mágicos que te permitan acceder a los datos de forma indexada. Ejercicio \ref{sec:datosIndexados}.
+
+\item Por último, adapta el Array2D para trabajar con matrices: Ejercicio \ref{sec:MatrizDatosIndexados}. 
+
+\end{enumerate}
+
+
+
+
+\
+
+
+\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Sesión Práctica 4}
+\addcontentsline{toc}{section}{Sesión Práctica 4} 
+
+
+\begin{enumerate}% [label=\sc{Paso} \arabic*.]
+
+\item El profesor te explicará:
+	\begin{itemize}
+	\item qué es un TDA Lineal,
+	\item los 3 tipos de estructuras de datos que se usan para su implementación en Python y
+	\item presta especial atención al concepto de nodo como estructura de datos y  cómo se pueden usar para construir estructuras enlazadas lineales. Memoriza los pasos que hay que realizar para las operaciones básicas en estructuras simplemente enlazadas (pág. \pageref{subsec:operacionesBasicasSimplemente}).
+	
+	\textbf{Recuerda:} No es lo mismo el concepto de nodo como elemento matemático (ver árboles y grafos) que el concepto de nodo como estructura de datos.
+	\end{itemize}
+
+\item Pon en práctica el uso de estructuras enlazadas con índices. Realiza el ejercicio \ref{sec:listasimplementeenlazada} considerando dos casos: que la lista enlazada tenga cabecera y que la lista enlazada no tenga cabecera.
+
+Lo ideal es que cada miembro del grupo desarrolle uno de los casos y después lo explique y  ponga a disposición del otro miembro del grupo.
+
+\end{enumerate}
+
+
+
+
+\
+
+
+\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Sesión Práctica 5}
+\addcontentsline{toc}{section}{Sesión Práctica 5} 
+
+
+\begin{enumerate}% [label=\sc{Paso} \arabic*.]
+
+\item El profesor te recordará algunas técnicas de búsqueda  y algunos algoritmos de ordenación que ya viste en el curso anterior (\cm[black]{sort\_bubble()}, \cm[black]{sort\_selection()}, \cm[black]{sort\_insertion()}). También te explicará nuevos métodos (\cm[black]{sort\_busket()} y \cm[black]{sort\_merge()}.
+
+\item Construye un módulo de búsqueda. Ejercicio \ref{sec:moduloBusqueda}.
+
+
+\item Construye también un  módulo de ordenación. Ejercicio \ref{sec:moduloOrdenacion}.
+
+
+
+
+\item Pon en práctica el uso de estructuras enlazadas con índices. Realiza el ejercicio \ref{sec:listasimplementeenlazada} considerando dos casos: que la lista enlazada tenga cabecera y que la lista enlazada no tenga cabecera.
+
+Es usual que en el examen teórico se platee un ejercicio muy relacionado con esta cuestión.
+
+\end{enumerate}
+
+
+
+
+
+
+
+

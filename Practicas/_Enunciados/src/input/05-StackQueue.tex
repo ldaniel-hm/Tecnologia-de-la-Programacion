@@ -1,0 +1,546 @@
+% !TEX root = ../Sesiones-TDA-Ejercicios.tex
+
+
+
+\chapter{Pilas y Colas}
+
+\etocsetnexttocdepth{3}
+\etocsettocstyle{\hrule \vskip 0.15cm \subsubsection*{Índice Parcial}\vskip -0.65cm}{\vskip 0.15cm\hrule}
+\localtableofcontents
+
+\
+
+\
+
+\centerline{\Large \bf Teoría}
+
+\formatoNormal
+
+\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{5.A TDA Pila}
+\addcontentsline{toc}{section}{5.A. TDA Pila}
+\label{sec:Pila}
+
+Las listas estudiadas en el sesión anterior son secuencias de datos donde no hay restricciones para consultar, insertar o borrar sus valores.
+Las Pilas se pueden contemplar como una lista donde existen restricciones en la consulta, inserción y borrado de sus valores.
+En concreto, en una  pila (stack) sigue el criterio LIFO: ``Last input, first output'. Esto quiere decir que solo se puede consultar o eliminar el último elemento introducido. Se llama tope al extremo de la lista donde tienen lugar las inserciones y supresiones en la lista.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input input/TDA-Pila
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+Las pilas se pueden representar con las mismas estructuras estudiadas para las listas. 
+Si se utilizara una estructura con capacidad finita y la pila se llenara entonces no cabe añadir más elementos. De añadirse entonces se producirá un error conocido como \textbf{desbordamiento} - overflow.
+
+Los métodos de la estructura de datos integrado \cm{list} de Python hacen fácil usar las listas como pilas pues esta estructura de datos dispone de los métodos \cm{append()} - que añade un elemento en la última posición de la lista - y \cm{pop()} - que sin argumento recupera el elemento de la última posición de la lista -.
+
+\begin{pyconsole}[][frame=single]
+stack = [3, 4, 5]
+stack.append(6); 
+print(stack)
+stack.pop()
+print(stack)
+\end{pyconsole}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{5.B TDA Cola}
+\addcontentsline{toc}{section}{5.B. TDA Cola}
+\label{sec:Cola}
+
+
+
+Las Colas se pueden contemplar como otro tipo de lista donde existen restricciones en la consulta, inserción y borrado de sus valores.
+En concreto, en una  cola (queue) sigue el criterio FIFO: ``First input, first output'. Esto quiere decir que los elementos se introducen al final  de la lista pero solo se puede consultar o eliminar el primer elemento que se introdujo. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input input/TDA-Cola
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Se puede implementar una cola en Python usando \cm{collections.deque}. 
+\begin{pyconsole}[][frame=single]
+from collections import deque
+cola = deque([3, 4, 5])
+cola.append(6); cola.append(7)
+print(cola)
+cola.popleft(); cola.popleft()
+print(cola)
+\end{pyconsole}
+Por descontado que las colas también se pueden representar con las mismas estructuras estudiadas para las listas. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{5.C TDA Cola de Prioridad}
+\addcontentsline{toc}{section}{5.C. TDA Cola de Prioridad}
+\label{sec:ColaPrioridad}
+
+Es una colección de elementos ordenados de acuerdo a una clave que el usuario asigna cuando añade un elemento a la cola. 
+El elemento con clave mínima será el siguiente en ser eliminado de la cola  (p.e. un elemento con clave 1 tendrá prioridad sobre un elemento con clave 2). 
+La clave suele ser numérica pero puede usarse cualquier objeto siempre que el objeto admita una ordenación $a<b$, para cualquier instancia $a$ y $b$. 
+
+
+
+
+Si una cola de prioridad tuviera varias entradas con claves equivalente, los métodos \cm[black]{min()} y \cm[black]{pop()} seleccionarán uno arbitrario si hay varios mínimos.
+
+
+
+Una forma de implementar una cola de prioridad es usar una lista ordenada. Los métodos  \cm[black]{min()} y  \cm[black]{pop()} retornarían el primer elemento de la lista y el método \cm[black]{add(k ,v)} insertaría la tupla/pareja en aquella posición de la lista que garantice que la lista sigue ordenada.
+
+
+Otra forma de implementar una cola de prioridad es usar una lista no ordenada. Como una cola de prioridad ordena sus elementos y la lista no lo está, se necesitará un método para encontrar la pareja con clave mínima:
+
+\begin{pyverbatim}[][frame=single]
+class UnsortedPriorityQueue():
+  def _find_min(self):
+    assert not self.is empty(), "Cola vacía"
+    small = self._data.first()
+    actual = self._data.after(small)
+    while actual is not None:
+      if data.element( ) < small.element():
+        small = actual
+      actural = self. data.after(actual)
+    return small
+    
+  def __init__(self):
+    self._data = List()
+    
+  # Termina con los métodos del TDA
+\end{pyverbatim}
+
+Una tercera forma de implementar este TDA es usando Heap (un tipo especial de árbol binario) y que se comentará en la página \pageref{sec:HeapSort}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{5.D Problemas de Búsqueda}\label{subsec:problemasbusqueda}
+\addcontentsline{toc}{section}{5.D. Problemas de Búsqueda}
+
+Existen muchas estrategias para resolver problemas. 
+Una de ellas es la basada en la búsqueda en espacio de estados.
+Un problema se puede contemplar como una situación en la que se parte de una situación inicial (no deseada) y se quiere llegar a una situación final (una de las deseadas).
+Resolver el problema consiste en partir de la situación inicial y realizar una acción para llegar a otra situación, a partir de esta situación se toma otra acción para llegar a otra situación, ... y así sucesivamente se van realizando acciones hasta llegar a una situación que se corresponda con la solución del problema.
+
+Una de esas situaciones recibe el nombre de estado. 
+Un estado caracteriza una situación concreta del problema en un instante de tiempo y  no presenta ningún tipo de ambigüedad. Algunos ejemplos son:
+\begin{itemize}
+\item Una configuración válida de un juego de tablero (ajedrez, damas, parchís, ...)
+es un estado del problema. Aquí el problema es conseguir ganar al contrario en el juego de tablero elegido.
+\item Una configuración válida de un juego tipo puzzle (un puzzle de piezas, sudoku, ...)
+es un estado del problema. Aquí el problema es resolver un solitario.
+\item Estar en una posición GPS de un trayecto entre dos puntos es un estado del problema de encontrar una ruta entre dos puntos seleccionados previamente.
+\item Tener un nivel de conocimientos y destrezas en una asignatura es un estado del problema ``hay que aprobarla''.
+\end{itemize}
+
+Una solución en los problemas representados mediante estados es una secuencia de acciones que permiten pasar de un estado a otro empezando por el estado inicial hasta llegar a un estado final. Gráficamente se puede representar mediante un árbol de búsqueda.
+
+A nivel de implementación se necesita una estructura de \key[black]{Node} que consta de los siguientes campos:
+
+\begin{itemize}
+\item \key[black]{\_state}: Almacena un \textbf{estado}
+\item \cm[black]{\_parent}: Almacena una referencia al \textbf{nodo} del estado que lo generó.
+\end{itemize}
+
+
+
+\noindent También se necesita una función con los parámetros:
+\begin{itemize}
+\item \key[black]{initial}: El estado inicial.
+\item \cm[black]{goal\_test}: la función (callable) que recibe como entrada un estado y retorna un booleano indicando si el estado es un estado solución o no.
+\item \cm[black]{successors}: la función (callable) que recibe como entrada un estado y retorna una lista de estados sucesores.
+\end{itemize}
+
+Su cuerpo es el siguiente:  \label{algorithm:search}
+
+\hfil \begin{minipage}{.85\textwidth}
+\begin{pyverbatim}[][frame=single]
+def search(initial, goal_test, successors):
+  frontera = {Nodo(initial, None)}  # LISTA de nodos, 
+                                    # empezando por el estado inicial
+  explorados = {initial}            # CONJUNTO de estados detectados
+                                    # también empieza con el estado inicial
+  mientras que la frontera no esté vacía:
+     nodo_actual = extraer un nodo de frontera (y borrarlo)
+     estado_actual = estado del nodo_actual
+     si goal_test(estado_actual):
+         retornar camino solución para el nodo_actual
+     para cada estado de successors(estado_actual):
+         si estado está en explorados:
+             pasar al siguiente estado
+         añadir estado a explorados
+         añadir el nodo(estado, nodo_actual) a frontera
+  retornar None
+\end{pyverbatim}
+\end{minipage}
+
+El retorno del camino solución para el nodo actual es un proceso que consta de
+los siguientes pasos:
+\begin{enumerate}
+\item Construir una lista (guardará la secuencia de estados que llevan a la solución)
+\item Recorrer la lista de nodos que empieza en nodo\_actual mientras que exista un nodo siguiente e ir añadiendo sus estados a la lista construida\footnote{Si no recuerdas como se recorre una lista repasa las operaciones básicas de estructuras enlazadas 
+ en la página \pageref{sec:EstructurasEnlazadas} y el Ejercicio  \ref{sec:moduloBusqueda}.}.
+\item Invertir el orden de la lista para que empiece desde el estado inicial y finalice en el estado solución encontrado.
+\end{enumerate}
+
+
+
+Un aspecto que debe quedar claro es ?`qué nodo de la frontera debe extraerse para continuar la búsqueda? Esta es una cuestión clave, pues es lo que determinará la estrategia de la búsqueda.
+Podemos distinguir 4 estrategias a partir del cuerpo de la función:
+\begin{itemize}
+\item Búsqueda en anchura. 
+Se selecciona un nodo de entre los nodos del nivel menos profundo  del grafo de búsqueda que aún no haya sido estudiado.
+
+\item Búsqueda en profundidad.
+Se selecciona un nodo de entre los nodos del ultimo nivel generado.
+
+\item Búsqueda uniforme.
+Se selecciona uno de los nodos que tenga menos coste acumulado.
+El coste acumulado de un nodo $n$ se define como $g(n)=g(n_{padre})+c(n_{padre}, n)$  donde $c(n_{padre}, n)$ es un valor no negativo que indica cuánto cuesta realizar la acción para pasar de $n_{padre}$ a $n$.
+
+Esto supone que en la clase \cm[black]{Node} habrá que añadir un campo más que represente el valor de $g()$ y por tanto su constructor tendrá 3 parámetros.
+
+Por ejemplo, podemos medir el coste de ir de un punto a otro del mapa de carreteras por el número de kilómetros. Vemos que ir del punto A al punto  B son 10Km e ir del punto B al punto C son 30Km. Si realizamos una búsqueda uniforme empezando por A: el coste acumulado para A es 0, el coste acumulado para B es 10 (si se llegó a él a través de A) y el coste acumulado para C es 40 (si se llegó a él a través de B).
+
+
+\item Búsqueda $A^*$.
+
+Que define el algoritmo clásico de la IA.
+Se selecciona uno de los nodos que tenga menos coste $f(n) = g(n) + h(n)$, donde:
+\begin{itemize}
+\item $g(n)=g(n_{padre})+c(n_{padre}, n)$, es el coste acumulado.
+\item $h(n)$ es una función heurística que asigna valores no negativos.
+
+El valor heurístico asociado a un estado es un valor que no sobreestima el coste real para llegar desde ese estado al estado final. 
+
+Continuando con el ejemplo anterior de la ruta A-B-C.
+Si nuestro objetivo es llegar a C, un valor heurístico para A  es cualquier valor entre 0 y 40. Cualquier valore subestima el valor real que es 40. Una subestimación (no sobreestimación) es un valor optimista sobre el coste real. Cuanto más se aproxime la subestimación al valor real, el algoritmo de búsqueda funcionará mejor. 
+
+Si se sobrestima los valores heurísticos el algoritmo no convergerá a la solución.
+En el ejemplo, no sería correcto dar una valor heurístico a A por encima de 40.
+
+\end{itemize}
+
+Notar que para implementar este algoritmo será necesario
+modificar la clase \cm[black]{Node} para que tenga dos campos: uno para almacenar el valor de $g()$ y otro para almacenar el valor de $h()$ lo que supone que el constructor tendrá 4 parámetros.
+
+Además, nuestra función de búsqueda tendrá esta signatura:
+
+\hfil
+\begin{minipage}{.5\textwidth}
+\begin{pyverbatim}[][frame=single]
+def astar(initial: T, 
+          goal_test: Callable[[T], bool], 
+          successors: Callable[[T], List[T]], 
+          heuristic: Callable[[T], float]
+          ) 
+          -> Optional[List[T]]
+\end{pyverbatim}
+\end{minipage}
+
+\end{itemize}
+
+\
+
+
+\
+
+
+\centerline{\Large \bf Ejercicios}
+
+
+
+\formatoEjercicio
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\separacion
+\section{Pilas} 
+\objetivo{1}{B}{Implementar TDA Stack}
+
+Usa la definición del TDA Stack de la página \pageref{sec:Pila}.
+Implementa este TDA usando Arra1D con capacidad limitada, listas de Python y listas simplemente enlazadas.
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+%\input ejercicios/05-Funciones/triplaPitagoricaSol.tex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\separacion
+\section{Colas} 
+\objetivo{1}{B}{Implementar TDA Queue}
+
+Usa la definición del TDA Queue de la página \pageref{sec:Cola}
+Implementa este TDA usando Arra1D con capacidad limitada, listas de Python y listas simplemente enlazadas.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\separacion
+\section{Resolución de Laberintos} \label{ejerc:laberintos}
+\objetivo{2}{B}{Búsqueda en anchura y profundidad}
+
+Implementa dos versiones del algoritmo de búsqueda en espacio de estados de la página \pageref{algorithm:search}:
+\begin{itemize}
+\item \cm[black]{dfs()}: es la versión que implementa el algoritmo de búsqueda en profundidad (depth-first search). En este caso la frontera es una lista de nodos con restricciones. En concreto será una pila (LIFO). Con ello, en cada iteración aumentamos el nivel de la búsqueda. 
+\item \cm[black]{bfs()}: es la versión que implementa el algoritmo de búsqueda en anchura (breadth-first search). Es la que considera que la lista de nodos frontera es una cola (FIFO).
+Así, en cada iteración siempre analizará los nodos de los niveles previos.
+\end{itemize}
+
+
+Para comprobar que la implementación es correcta resolveremos el problema de encontrar un camino solución en un laberinto formados por un grid de celdas cuadrados. Cada celda puede estar libre o bloquedada y de entre las libres hay dos celdas destacadas: la celda de inicio que es el punto de partida y la celda objetivo que es el punto de salida. Si representamos cada celda mediante una pareja $(fila, columna)$ tenemos un problema de búsqueda en espacio de estados:
+\begin{itemize}
+\item Estado inicial: $(inicio.fila, inicio.columna)$
+\item Estado objetivo: $(objetivo.fila, objetivo.columna)$
+\item Solución: una secuencia de estados que empieza en el estado inicial y finaliza en el estado objetivo.
+
+El elemento siguiente a $(fila, columna)$ en la secuencia será uno de estos cuatro estados
+$(fila\pm 1, columna\pm 1)$ y siempre y cuando no se salga de los límites del grid.
+\end{itemize}
+
+
+Para resolver el problema creará el fichero \pyv{Maze.py} siguiendo los siguientes pasos:
+
+\begin{enumerate}
+\item Copiar el siguiente código:
+\begin{pyverbatim}[][frame=single]
+from typing import NamedTuple
+from enum import Enum
+
+class Cell(str, Enum):
+    EMPTY = " "
+    BLOCKED = "#"
+    START = "S"
+    GOAL = "G"
+    PATH = "."
+
+class MazeLocation(NamedTuple):
+    row: int
+    column: int
+\end{pyverbatim}
+
+Son dos clases hijas, una de \cm{NamedTuple} y otra de \cm{(str, Enum)} .
+\begin{itemize}
+\item \cm[black]{NamedTuple} es la clase que permite trabajar con tuplas cuyos campos tienen nombre y por tanto podemos acceder a su valores usando la notación punto. 
+
+La clase \cm[black]{MazeLocation} es la que condificará los estados del problema.
+
+\item \cm[black]{Cell} define un tipo enumerado. Sus valores se acceden como \cm[black]{Cell.EMPTY}, \cm[black]{Cell.BLOCKED}, etc y se interpretan como constantes (realmente son instancias únicas y no podrán ser modificadas). Los enumerados se usan cuando se quieren usar tipos de datos con una cantidad limitada de valores y con valores concretos identificativos. Entiéndelo como una extensión de los booleanos.
+
+
+Para acceder a los miembros en enumeraciones mediante sentencias de la forma Cell.BLOCKED no funcionará porque realmente son objetos. Como tales constan de atributos. Si tiene un miembro enum y puede acceder a su {\tt name} o {\tt value}:
+
+\begin{pyverbatim}[][frame=single]
+>>> Cell.BLOCKED
+<Cell.BLOCKED: '#'>
+>>> Cell.BLOCKED.name
+'BLOCKED'
+>>> Cell.BLOCKED.value
+'#'
+\end{pyverbatim}
+
+Para saber más sobre enumeraciones consulte \url{https://docs.python.org/es/3/library/enum.html}.
+\end{itemize}
+
+\item Crea el fichero \cm[black]{Maze.py} e implementa la clase \cm[black]{Maze} para trabajar con laberintos formados por un grid de cuadrados compuesto de \cm[black]{rows}-filas y \cm[black]{columns}-columnas. 
+Aparte de los dos atributos que almacenan las dimensiones, dispondrá de un atributo para representar al grid y que será una lista de listas de elementos de tipo \cm[black]{Cell}. 
+Para las listas se usará el tipo de dato List de Python, por lo que a cada celda se accederá mediante la notación típica de listas:  \pyv{_grid[fila][columna]}.
+
+También dispone dos atributos de tipo \cm[black]{MazeLocation} que almacenará el estado inicial y final. 
+
+Para construir un laberinto se necesita conocer sus dimensiones, el estado inicial y el estado final. Entonces se construye un grid formado inicialmente por celdas vacías. Posteriormente cambia algunas celdas vacías a celdas bloqueadas.
+
+El cambio de celdas se hace recorriendo todas las celdas y para cada una se lanza un número aleatorio según una uniforme (0,1) y si el número está por debajo de un cierto umbral, entonces se realiza el cambio. Usa \cm{random.uniform} y un umbral con valor 0.2 si quieres que (aproximadamente) el 20\% de las celdas cambien su valor.
+
+\item Añade a \cm[black]{Maze} los métodos que se pasarán como argumentos en los algoritmos de búsqueda \cm[black]{dfs()} y \cm[black]{bfs()}:
+\begin{itemize}
+\item \pyv{def goal_test(self, maze_location: MazeLocation) -> bool}.
+
+	Dada una localización (o estado) de tipo \pyv{MazeLocation} indica si se corresponde con el estado final.
+	
+\item \pyv{def succesors(self, ml: MazeLocation) -> List[MazeLocation]}.
+
+	Dado un estado \hbox{\cm[black]{(ml.row, ml.column)}}
+	retorna los 4 estados  \cm[black]{(ml.row $\pm$ 1, ml.column $\pm$ 1)}
+	descartando aquellos que se salgan de las dimensiones del grid
+	y aquellos que se correspondan a celdas bloqueadas.
+\end{itemize}
+
+
+Añade cuantos métodos consideres a \cm[black]{Maze} para que te permita resolver este problema. Entre ellos deberás añadir:
+\begin{itemize}
+\item \pyv{def mark(self, path: List[MazeLocation])}.
+
+Dado un camino solución (lista de estados) cambiar 
+las celdas correspondientes del grid por \cm[black]{Cell.PATH}.
+
+\item \pyv{def __str__(self) -> str}
+
+Para mostrar el laberinto con \cm{print()}.
+\end{itemize}
+
+
+\item Crea un fichero para comprobar que todo funciona.
+Tendrás que importar las clases \cm[black]{Maze}, \cm[black]{dfs} y \cm[black]{bfs} y ejecutar los siguientes pasos:
+
+\begin{itemize}
+\item Crear un laberinto \cm[black]{maze}.
+\item Invocar a \pyv{solution = busqueda(maze.start, maze.goal_test, maze.succesors)}
+\item Mostrar el laberinto indicando si se ha encontrado solución o no.
+\end{itemize}
+
+\end{enumerate}
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+%\input ejercicios/05-Funciones/AleatoriosSol.tex
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\separacion
+\section{Laberintos con Heurística} \label{ejer:Astar}
+\objetivo{3}{-}{Aplicar $A^*$}
+
+Implementa el algoritmo $A^*$ y aplícalo al problema del laberinto.
+Usa como función heurística la distancia de Manhattan que hay entre el estado actual y el estado objetivo. La definición de esta distancia la tienes en el ejercicio anterior.
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+%\input ejercicios/05-Funciones/AleatoriosSol.tex
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\separacion
+\section{Resolución de n-Puzzle} 
+\objetivo{3}{-}{Implementar $A^*$}
+
+El $n$-Puzzle es un problema clásico de búsqueda con heurísticas.
+Consta de un grid cuadrado formado por $k\times k=n+1$ celdas.
+Por ejemplo, el $8$-puzzle es un grid de $3\times 3$, el $15$-puzzle es un grid de $4\times 4$ celdas, etc ... El grid consta de $n$-piezas colocadas ``al azar'' en el grid y cada una tiene un número del $1$ al $n$. El objetivo final es conseguir una configuración (estado) que ordena de forma creciente las piezas de izquierda a derecha y de arriba a abajo.
+
+\noindent Un par de ejemplos de estados solución son:
+
+%\begin{itemize}
+%\item 
+Solución del 8-puzzle:
+\begin{tabular}{|c|c|c|}  \hline
+1 & 2  & 3  \\   \hline
+4 & 5  & 6  \\ \hline
+7 & 8  &  \\  \hline
+\end{tabular}
+%\item 
+\hspace{1cm}
+Solución del 15-puzzle:
+\begin{tabular}{|c|c|c|c|}  \hline
+1 & 2  & 3 & 4 \\  \hline 
+5 & 6  & 7 & 8 \\ \hline
+9 & 10  & 11 & 12 \\ \hline
+13 & 14  & 15 & \\ \hline
+\end{tabular}
+%\end{itemize}
+
+
+Dado un estado, una situación de n-Puzzle, existen 4 estados que se pueden llegar a construir a partir de él. Cada uno de ellos se consigue intercambiando la celda vacía por una celda enumerada adyacente siempre que esté en la misma fila o columna.
+Es decir, partiendo de un estado general
+\begin{tabular}{|c|c|c|}  \hline
+a & b  & c  \\   \hline
+d &   & e  \\ \hline
+f & g  & h  \\  \hline
+\end{tabular}
+se pueden llegar a uno de los siguientes estados:
+
+\hfil\begin{tabular}{|c|c|c|}  \hline
+a &    & c  \\   \hline
+d & b  & e  \\ \hline
+f & g  & h  \\  \hline
+\end{tabular} 
+\hspace{1cm}
+\begin{tabular}{|c|c|c|}  \hline
+a & b  & c  \\   \hline
+ &  d & e  \\ \hline
+f & g  & h  \\  \hline
+\end{tabular}
+\hspace{1cm}
+\begin{tabular}{|c|c|c|}  \hline
+a & b  & c  \\   \hline
+d & e  &   \\ \hline
+f & g  & h  \\  \hline
+\end{tabular}
+\hspace{1cm}
+\begin{tabular}{|c|c|c|}  \hline
+a & b  & c  \\   \hline
+d & g  & e  \\ \hline
+f &   & h  \\  \hline
+\end{tabular}
+
+El algoritmo de búsqueda adecuado para este tipo de problemas es el $A^*$ pero hemos de definir una función de costes para los costes acumulados y una heurística.
+
+\begin{itemize}
+\item 
+Como función de costes, se puede considerar la unidad. Es decir $g(n)=g(n_{padre}) + 1$.
+
+\item 
+Como función heurística se puede considerar la suma de todas distancias de cada pieza a su posición. Dicha distancia se define de la siguiente forma:
+
+Si una pieza $p$ se encuentra en la posición $A=(x, y)$ y la posición final de la pieza es la posición $B=(p.x, p.y)$, la distancia se define como:
+$
+d(A, B) = |x-p.x| + |y-p.y|
+$.
+Esta distancia se llama distancia de Manhattan.
+\end{itemize}
+
+\
+
+El objetivo de este ejercicio es implementar el algoritmo $A^*$ para resolver este problema.
+
+ 
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+%\input ejercicios/05-Funciones/AleatoriosSol.tex
+
+
+
+
+
+
+
+\separacion
+
+

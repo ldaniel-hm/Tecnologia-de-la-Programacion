@@ -1,0 +1,26 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+\begin{definition}[Map]{}\label{def:Map}
+
+Un Map representa a una colección de registros no repetidos donde cada uno consta de una clave y un valor. La clave debe ser comparable.
+
+\begin{itemize}
+\item \cm[black]{Map() : Map}. Crea un nuevo map vacío.
+
+\item \cm[black]{len() : int}. Retorna el número de registros clave/valor que existen en el map..
+
+\item \cm[black]{contains(key) : bool}. Indica si la clave \cm[black]{key} se encuentra en el contenedor. Retorna \cm{True} si la clave está contenida y \cm{False} si no está contenida.
+
+
+\item \cm[black]{remove(key) : None}. Elimina el registro que tiene como clave el valor \cm[black]{key}. Lanza un error si el elemento no existe.
+
+
+\item \cm[black]{add(key, value) : None}. Modifica el map añadiendo el par \cm[black]{key/value} al contenedor. Si existiera un registro con la clave \cm[black]{key} se sustituye el par \cm[black]{key/value} existente por el nuevo par \cm[black]{key/value}. Retorna \cm{True} si la clave es nueva y \cm{False} si se realiza una sustitución.
+
+
+\item \cm[black]{valueOf(key) :  TipoValor}.  Retorna el valor asociado a la clave dada. La clave debe de existir en el Map.
+
+\item \cm[black]{iterator() : IteratorMap}: Crea y retorna un iterador para el conjunto.
+\end{itemize}
+\end{definition}

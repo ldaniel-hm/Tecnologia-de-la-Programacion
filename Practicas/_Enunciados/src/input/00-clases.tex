@@ -1,0 +1,183 @@
+
+
+
+\
+
+La Programación Orientada a Objetos es una extensión de la Programación Estructurada y Modular. Los dos primeros conceptos más básicos son:
+\begin{itemize}
+\item \key{Clase.} Es una plantilla que encapsula atributos y métodos.
+	\begin{itemize}
+	\item Atributo: es una variable, que puede ser de cualquier tipo incluidas otras clases.  
+	\item Método: es el concepto de función en programación modular pero que se definen dentro de una clase.
+	\end{itemize}
+\item \key{Objeto.} Un caso particular de la clase (o plantilla). También se llama instancia de la clase.
+
+Los atributos o variables con valores concretos representan las propiedades de un objeto (su estado) y los métodos definen su comportamiento (lo que es capaz de hacer u operaciones que realiza).
+\end{itemize}
+
+
+
+
+\begin{ejercicio}\mbox{}
+\begin{itemize}
+\item 
+Considera algún objeto del lugar donde estés leyendo este documento. Considera aquellos que son capaces de hacer cosas. Por ejemplo, una televisión, un ordenador, un coche, .... 
+
+\item
+Considera todos los objetos del mismo tipo. Por ejemplo, todas las televisión, todos los ordenadores, todos los coche, .... 
+
+\item
+Define las propiedades y métodos comunes de los objetos que hayas considerado. En definitiva, define su clase.
+
+\item
+Construye al menos tres objetos particulares de esa clase.
+\end{itemize}
+\end{ejercicio}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{2.B Definición de Clases en Python} 
+\addcontentsline{toc}{section}{2.B. Definición de Clases en Python}
+
+
+
+Para definir una clase se necesitan definir los siguientes aspectos:
+
+\begin{itemize}
+\item Los atributos: las variables que definirán los estados de los objetos.
+\item Los constructores: Se pueden contemplar como métodos especiales que permiten establecer el estado inicial de los objetos cuando se construyen por primera vez.
+\item Los métodos modificadores: Son los métodos que modifican los atributos de un objeto.
+\item Los métodos accesores\footnote{¿Cuál es la palabra en español?}: Son los que retornan información de los atributos de un objeto.
+\item Los demás métodos: son los que realizan operaciones usando los atributos. Lo normal es que retornen alguna información.
+\end{itemize}
+
+En Python se requiere el uso de la palabra reservada \cm{self} en la definición de los métodos de la clase. \cm{self} representa al objeto que se está ejecutando en ese momento.
+
+\begin{pyconsole}[][frame=single]
+class Circulo:
+    __slots__ = '_radio'       # Atributos permitidos en un objeto
+    _radio: int                # Atributo de los objetos tipo Círculo
+    def __init__(self, radio): # El constructor de círculos
+        self._radio = radio       
+    def cambia_radio(self, nuevo_radio): # Método modificador
+        if nuevo_radio > 0:
+            self._radio = nuevo_radio           
+    def dime_radio(self):       # Método accesor
+        return self._radio
+    def area(self):             # Método que realiza un cálculo
+        return 2*3.1415*self._radio
+        
+\end{pyconsole}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{2.C El ciclo de vida de un Objeto} 
+\addcontentsline{toc}{section}{2.C. El ciclo de vida de un Objeto}
+
+
+Para poder usar un objeto se tienen que seguir los siguientes pasos
+
+\begin{enumerate}
+\item Creación
+
+\begin{enumerate}
+\item 
+Definir una clase \cm{Clase}. Cuando se define una clase se tiene un nuevo tipo de dato.
+
+\item 
+Declara una variable \cm{var} como tipo de dato \cm{Clase}.
+
+Algunos lenguajes de programación no necesitan el paso de declaración como le ocurre a Python.
+
+\item 
+Construir un objeto y asignar su referencia a la variable.
+\end{enumerate}
+
+\item Modificación
+\begin{itemize}
+\item Se podrá acceder a los métodos con la notación punto: \cm{var.metodo()}
+
+\item No se permite el acceso directo a los atributos, \cm{var.atributo}. Deberá usar un método accesor para acceder los atributos.
+\end{itemize}
+
+	
+\item Eliminación
+
+\begin{itemize}
+\item Una objeto dejará de existir cuando no exista ninguna variable \cm{var} que haga referencia al objeto.
+
+\item Algunos lenguajes permiten la eliminación directa. P.e. en Python se tiene \cm{del()}\end{itemize}
+
+
+\end{enumerate}
+
+
+
+Como ejemplo, considere la clase \cm{Circulo} y manipulemos uno de sus objetos. 
+\begin{pyconsole}[][frame=single]
+mi_circulo = Circulo(3)         # Crea un objeto círculo de radio 3
+print(mi_circulo.dime_radio())   # Se accede a un atributo a través de un método
+mi_circulo.cambia_radio(5)      # Se modifica el radio
+print(f"Área: {mi_circulo.area()}") # Mostrar el área
+del(mi_circulo)                 # Borrar el objeto
+print(mi_circulo.ver_radio())   # El objeto ya no existe
+\end{pyconsole}
+
+Expliquemos un par de métodos:
+
+\begin{itemize}
+\item \pyv{mi_circulo = Circulo(3)}
+	\begin{enumerate}
+	\item 
+	Es una igualdad, así que el lado izquierdo guardará lo que retorne el lado derecho.
+	
+	\item
+	\pyv{Circulo(3)} es la forma de construir un objeto de la clase círculo. 
+	
+	Un objeto siempre se construye escribiendo el nombre de la clase seguido de paréntesis. En el interior de los paréntesis se indican los valores iniciales para los atributo que se quiere construir.
+	
+	Cuando se crea un objeto, se invoca a continuación al método de inicialización \pyv{__init__(self, radio)}.
+	\begin{itemize}
+	\item
+	El primer parámetro hace referencia al objeto que se acaba de construir y el resto de los parámetros hace referencia a los argumentos que se introdujeron en el paso 2. En este caso \cm{radio=3}.
+	
+	\item
+	En el cuerpo del método especial tenemos \pyv{self._radio = radio}. Como se trata de una igualdad, en el lado izquierdo se guardará lo que retorne el lado derecho.
+	
+	\begin{itemize}
+	\item 
+	En el lado derecho solo se accede al valor de la variable \cm{radio}, que es \cm{3}.
+	
+	\item
+	En el lado izquierdo, \pyv{self._radio} hace referencia al atributo \pyv{_radio} del objeto \pyv{self} (el que se está ejecutando).
+	\end{itemize}
+	
+	Es decir, el atributo \pyv{_radio} del objeto que se acaba de construir almacena el valor \cm{3}. 
+	\end{itemize}
+	
+	\item Tras realizar la construcción e inicialización de un objeto, se retorna la referencia del lugar de la memoria donde se ha guardado el objeto, que se guarda en la variable \pyv{mi_circulo}.
+	\end{enumerate}
+
+	
+\item \pyv{print(f"Área: {mi_circulo.area()}")}
+
+	\begin{enumerate}
+	\item Invoca a la función de impresión que en este caso requiere la ejecución de \pyv{mi_circulo.area()}.
+	
+	\item \pyv{mi_circulo.area()} indica que el objeto \pyv{mi_circulo} invoca al método \pyv{area()}.
+		\begin{itemize}
+		\item Recordemos que en \pyv{metodo(self, p1, p2, ...)} el primer parámetro hace referencia al objeto que lo invoca y el resto de los parámetros hace referencia a los argumentos que se usan en la invocación.
+		\item Por tanto (1) \pyv{self} hace referencia al objeto de \pyv{mi_circulo} y (2) en efecto, el método \pyv{area()} debe invocarse sin argumentos aun cuando en su signatura aparezca uno. 
+		\item El el cuerpo vemos la instrucción \pyv{2*3.1415*self._radio}, por tanto se realiza un operación con el atributo \pyv{_radio} del objeto \pyv{mi_circulo}. El valor resultante se retorna.
+		
+		Como en el paso anterior se modificó el valor del radio al valor \cm{5} el resultado es \pyv{2*3.1415*self._radio}=\pyv{2*3.1415*5}=\pyv{31.415}
+		\end{itemize}
+	\item El resultado se sustituye en el string \pyv{f"Área: {mi_circulo.area()}"}=\pyv{f"Área: 31.415"}, que es lo que se imprime.
+	\end{enumerate}
+\end{itemize}
+

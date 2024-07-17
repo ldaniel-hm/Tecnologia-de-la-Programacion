@@ -1,0 +1,327 @@
+% !TEX TS-program = xepythontex
+% !TEX encoding = UTF-8 Unicode
+
+
+
+\documentclass[10pt,pagestyle=titlesec]{ldanielbook}
+%\documentclass[10pt]{book}
+
+
+\usepackage[linguistics]{forest}
+
+\forestset{%
+  gappy tree/.style={
+    for tree={
+      circle,
+      draw,
+      s sep'+=0pt,
+      fit=band,
+    },
+  },
+  c phantom/.style={draw=none, no edge},
+}
+
+
+
+
+\newif\ifsoluciones
+\newif\ifnotas
+
+\solucionesfalse % Para no mostrar las soluciones
+%\solucionestrue % Para SÍ mostrar las soluciones
+\notasfalse% Para no mostrar los globos
+\notastrue % Para  mostrar los globos
+
+%\input preambulo.tex
+
+
+\addto\captionsspanish{\renewcommand{\chaptername}{Sesión}}
+\addto\captionsspanish{\renewcommand{\partname}{Parte}}
+
+
+\renewcommand\thesection{\arabic{chapter}.\arabic{section}}
+
+
+\newcommand{\formatoEjercicio}{
+\titleformat{\section}[drop]
+	{\large\sf\filright} %\filcenter}%\selectfont\filright}
+	{\thesection}{0.5em} 
+	{} % {\fbox{\itshape\thesubsection}}{1em}{}
+
+	\titlespacing{\section}{0.45\textwidth}{*1.75}{1pc}
+	\titlespacing{\subsection}{.45\textwidth}{*1.75}{1pc}
+	%%{12pc}{1.5ex plus .1ex minus .2ex}{1pc} % wrap
+}
+
+
+
+
+\newcommand{\formatoSesion}{
+\titleformat{\section}[block]
+	{\large\bfseries}%\filcenter}%\selectfont\filright}
+	{\thesection}{0.5em}{\bfseries} % {\fbox{\itshape\thesubsection}}{1em}{}
+
+	\titlespacing{\section}{0.0\textwidth}{*1.75}{1pc}
+	\titlespacing{\subsection}{0.0\textwidth}{*1.75}{1pc}
+	%%{12pc}{1.5ex plus .1ex minus .2ex}{1pc} % wrap
+}
+
+
+
+
+%\cm{\titleformat{\subsection}[drop]
+%{\large\sf\filright}%\filcenter}%\selectfont\filright}
+%{\thesubsection}{0.5em}{} % {\fbox{\itshape\thesubsection}}{1em}{}
+%\titlespacing{\subsection}{.25\textwidth}{*1.75}{1pc}
+%%%{12pc}{1.5ex plus .1ex minus .2ex}{1pc} % wrap}
+
+\newcommand{\formatoNormal}{
+\titleformat{\section}[block]
+	{\large\bfseries}%\filcenter}%\selectfont\filright}
+	{\thesection}{0.5em}{\bfseries} % {\fbox{\itshape\thesubsection}}{1em}{}
+
+	\titlespacing{\section}{0.0\textwidth}{*1.75}{1pc}
+	\titlespacing{\subsection}{0.0\textwidth}{*1.75}{1pc}
+	%%{12pc}{1.5ex plus .1ex minus .2ex}{1pc} % wrap
+}
+
+
+
+\usepackage{todonotes}
+
+\newcommand{\nota}[1]{\todo[inline, bordercolor=black!20, backgroundcolor=white!20]{#1}}
+\newcommand{\falta}[1]{\todo[inline, inlinewidth=.7\textwidth, bordercolor=blue!30, backgroundcolor=gray!20]{#1}}
+\newcommand{\proposito}[1]{\todo[inline, bordercolor=blue!40, backgroundcolor=blue!40]{#1}}
+
+%\usepackage{bbding}
+\newcommand{\nivel}[1]{%
+    \IfEqCase{#1}{%
+        {1}{\textcolor{green!70!black}{\FiveStar}\FiveStarOpen\FiveStarOpen\/}%
+        {2}{\textcolor{orange!80!white}{\FiveStar\FiveStar}\FiveStarOpen\/}%
+        {3}{\textcolor{red!80!white}{\FiveStar\FiveStar\FiveStar\/}}%
+        % you can add more cases here as desired
+    }%[\PackageError{nivel}{Undefined option to tree: #1}{}]%
+}%
+
+
+\newcommand{\objetivo}[3]{ 
+		\begin{minipage}{.73\textwidth}
+		       \nivel{#1} \/ 
+		       \IfEqCase{#2}{{B}{{\Large\HandPencilLeft}}} \vskip 0.0in
+			\falta{#3}
+		\end{minipage}
+}
+
+
+
+
+\titlespacing{\subsection}{.25\textwidth}{*1.75}{1pc}
+%%{12pc}{1.5ex plus .1ex minus .2ex}{1pc} % wrap
+
+
+\renewmenumacro{\directory}[/]{hyphenatepathswithblackfolder}
+\renewmenumacro{\keys}{shadowedroundedkeys}
+
+
+
+
+\usepackage{background}
+\backgroundsetup{
+    placement=center,
+    contents={},
+    opacity=1
+}
+\backgroundsetup{angle=0,contents={
+	\begin{tabular}{c}
+	\includegraphics[width=2cm]{imageBackGround} \\ 
+	\includegraphics[width=2cm]{imageBackGround}
+	\end{tabular}
+	}}
+
+
+\newcommand{\separacion}{\noindent\dotfill%\hrule
+}
+
+
+
+%Sale una \zref{eje:noSelaNada} 
+%\ztitleref{eje:noSelaNada}
+
+
+%\title{Ejercicios de Prácticas con Solución}
+%\author{Grupo docente ISCyP\\ Para cualquier errata o sugerencia notificar a {\tt ldaniel @ um.es}}
+%\date{}                                           % Activate to display a given date or no date
+
+
+
+
+\begin{document}
+
+
+
+\pagenumbering{roman}
+
+
+\pagestyle{empty}
+
+%\maketitle
+
+\begin{titlepage}
+	\flushright
+		\includegraphics[width=.3\textwidth]{logo-um-peq.png}\par\vspace{1cm}
+	\par
+	\vspace{3cm}
+	\centering
+	{\scshape\Huge Tecnologías de la Programación\par}
+	\vspace{2cm}
+	{\huge\bfseries Relación de Ejercicios\par}
+	\vspace{0.5cm}
+	{\bfseries \huge y\par}
+	\vspace{0.5cm}
+	{\bfseries \huge Sesiones de Prácticas\par}
+	\vspace{2cm}
+	{\Large\itshape Luis Daniel Hernández Molinero\par}
+	\vspace{0.4cm}
+	{\large Dpto. de Ingeniería de la Información y las Comunicaciones\par}
+	\vspace{0.4cm}
+	{\large \url{ldaniel@um.es} \par}
+	\vfill
+
+% Bottom of the page
+\newtimeformat{myTime}{\twodigit{\THEHOUR}h:\twodigit{\THEMINUTE}m}
+\settimeformat{myTime}
+	Última modificación: \par {\large 12 de diciembre de 2023} % \today\/ (\currenttime)}
+\end{titlepage}
+
+
+% \thispagestyle{empty}
+
+\pagestyle{plain}
+\pagenumbering{roman}
+
+\section*{Preámbulo}
+
+\noindent Este documento consta de una serie de ejercicios de dificultad creciente divididos por semanas y sesiones. Cada sesión consta de una parte de teoría y otra de prácticas (salvo la primera sesión). La parte teórica de todas las sesiones de una semana se habrán tenido que leer antes de la sesión de clase presencial de dicha semana. Al inicio de la clase presencial el profesorado hará un resumen de los aspectos teóricos más relevante dejando los detalles para esa lectura previa y su estudio.
+
+
+\
+
+\noindent Cada ejercicio consta de un nombre seguido de una caja con la siguiente apariencia.
+
+\
+
+\objetivo{1}{B}{Resumen/intención del ejercicio}
+
+\begin{itemize}
+\item En la parte superior aparece una secuencia de 3 estrellas, cuyo significado es el siguiente:
+
+\begin{minipage}{.25\textwidth}
+	\begin{itemize}
+	\item[] \nivel{1}\/ Nivel fácil.
+	\item[] \nivel{2}\/ Nivel medio.
+	\item[] \nivel{3}\/ Nivel alto.
+ 	\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{.65\textwidth}
+El nivel de dificultad se establece siempre en el contexto del tema/tópico correspondiente. Por ejemplo, para el tópico de variables pueden encontrarse los 3 niveles, pero los mismos problemas en el contexto del uso de funciones todos tendrían un nivel fácil pues el uso de variables es un tema fundamental.
+\end{minipage}
+
+\item A continuación aparece una mano. Es un icono que no siempre aparece.
+
+Si aparece el icono de la mano significa que es un ejercicio que: o se explicará en clase u {\bf obligatoriamente deberá ser desarrollado por el estudiante para adquirir las destrezas \underline{mínimas} necesarias} en la resolución de problemas con programación orientada a objetos e implementación de tipos de datos abstractos.
+
+Para los que no aparece el icono no significa que el ejercicio no deba de hacerse, todo lo contrario pues son ejercicios de refuerzo y conviene hacerlos o al menos plantearlos.
+
+\item En la caja con fondo gris se expresa en una o dos frases la intencionalidad del ejercicio.
+\end{itemize}
+
+\
+
+El desarrollo de los ejercicios se hará mediante una estrategia de Divide y Vencerás.
+En concreto están diseñados para realizarse en grupos de 2 miembros y entre ambos deben de realizar los ejercicios propuestos. Cada miembro debería desarrollar un ejercicios en su totalidad y explicarlo al otro miembro del grupo. Un ejemplo más práctico. En una sesión hay que implementar las pilas y las colas y cada uno de estos TDA consta de 6 métodos. Entonces un miembro afronta las pilas y el otro miembro afronta las colas. Se pueden usar otras estrategias pero lo que se recomienda es que cada alumno implemente una serie de métodos y los ponga en común con su compañero/a para resolver el ejercicio. 
+
+
+
+
+
+\clearpage
+\setcounter{tocdepth}{1}
+\renewcommand\contentsname{Relación de Ejercicios}
+\tableofcontents
+\addtocontents{toc}{~\hfill\textbf{Página}\par}
+
+\clearpage
+
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+
+%\part{TDAs y Ejercicios}
+
+%\part*{Preliminares}
+\input input/01-pythonPyCharm.tex
+
+
+%\part{}
+\input input/02-Abstraccion.tex
+
+
+%\part{}
+\input input/03-Secuencias.tex
+%\input input/04-Array.tex
+
+
+
+
+%\part{}
+\input input/04-List.tex
+
+
+
+%\part{}
+\input input/05-StackQueue.tex
+
+
+%\part{}
+\input input/07-ArbolesyGrafos
+
+
+
+%\part{Sesiones Prácticas}
+
+
+%\part{}
+\input input/08-Sesiones
+
+
+\end{document}
+
+\part{}
+\input input/08-Proyectos
+
+
+\clearpage 
+
+\part*{Resumen}
+\input input/Resumen.tex
+
+%
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+\chapter{Ejercicios}
+
+\url{https://github.com/Fhernd/PythonEjercicios}
+
+\url{https://github.com/Fhernd/Python-CursoV2}
+
+
+
+\end{document}
+

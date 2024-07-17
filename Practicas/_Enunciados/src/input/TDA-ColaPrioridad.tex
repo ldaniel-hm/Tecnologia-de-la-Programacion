@@ -1,0 +1,25 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+
+\begin{definition}[Cola de Prioridad]{}\label{def:ColaPrioridad}
+
+Una cola representa es una lista de elementos similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada.
+Suponiendo que la prioridad es ser clave-mínima, la definición es:
+\begin{itemize}
+\item \cm[black]{PriorityQueue() : PriorityQueue}. Crea una nueva cola de prioridad.
+
+\item \cm[black]{add(k ,v)}. Añade un nuevo elemento \cm[black]{(k ,v)} 
+
+\item  \cm[black]{min()}. Retorna  la pareja \cm[black]{(k ,v)} siendo  \cm[black]{k} la clave mínima; pero no borrar el item. Se muestra un error si la cola de prioridad está vacía. Si la cola de prioridad tuviera varias entradas con claves equivalente seleccionará uno arbitrario si hay varios con clave mínima.
+
+\item \cm[black]{pop() : (key, value)}. Retorna la pareja \cm[black]{(k ,v)} siendo  \cm[black]{k} la clave mínima. Borra también el item. Muestra un error si la cola de prioridad está vacía.  Si la cola de prioridad tuviera varias entradas con claves equivalente seleccionará uno arbitrario si hay varios con clave mínima.
+
+
+\item \cm[black]{es\_vacia() : bool}. Indica si la pila está vacía (retorna \cm[black]{True}) o no (retorna \cm[black]{False}).
+
+\item \cm[black]{len() : int}. Retorna el número de items existentes en la cola de prioridad.
+\end{itemize}
+
+Se puede implementar mediante una lista, pero es más eficiente usar un \textbf{montículo} (ver árboles binarios).
+\end{definition}

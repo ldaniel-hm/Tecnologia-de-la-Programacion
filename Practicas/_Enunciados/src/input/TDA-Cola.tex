@@ -1,0 +1,32 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+\begin{definition}[Cola]{}\label{def:Cola}
+
+Una cola representa una lista de elementos que se rigen por el criterio FIFO.
+
+\begin{itemize}
+\item \cm[black]{Queue() : Queue}. Crea una nueva cola, inicialmente vacía.
+
+\item \cm[black]{peek() : value}. Retorna el valor del primer elemento de la lista, pero no lo borra.  También es usual esta signatura \cm[black]{front() : value}.
+
+\item \cm[black]{dequeue() : value}. Retorna el primer elemento de la cola borrandolo de la cola. También es usual esta signatura  \cm[black]{top() : value}.
+
+Para la cola  $<a_0, a_1, \ldots,>$ retornará el valor $a_0$.
+Se genera un error si la cola está vacía.
+
+\item \cm[black]{enqueue(value) : None}.
+Añade un nuevo elemento al final de la cola
+
+Para la cola  $<a_0, a_1, \ldots, a_{n-1}>$ 
+se modificará a la lista $<a_0, a_1, \ldots, a_{n-1}, value>$ 
+
+\item \cm[black]{len() : int}. Retorna el número de elementos de la cola.
+
+\item \cm[black]{isEmpty() : Bool}. Indica si la cola está vacía o no.
+
+\item \cm[black]{clear() : None}. Limpia la cola y la deja sin elementos.
+
+\end{itemize}
+\end{definition}
+

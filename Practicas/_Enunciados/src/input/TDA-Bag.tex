@@ -1,0 +1,26 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+\begin{definition}[Bag]{}\label{def:Bag}
+
+Un bolso (Bag) representa a una colección de elementos que pueden aparecer repetidos y que no tienen un orden en particular de aparición.
+
+\begin{itemize}
+\item \cm[black]{Bag() : Bag}. Crea un nuevo \textit{bag}, inicialmente vacío.
+
+\item \cm[black]{len() : int}. Retorna el número de elementos en el \textit{bag}.
+
+Para una bag cualquiera $<a_0, a_1, \ldots, a_{n-1}>$ retornará el valor $n$.
+
+\item \cm[black]{contains(item) : bool}. Indica si el elemento \cm[black]{item} se encuentra en el \textit{bag}. Retorna \cm{True} si está contenido y \cm{False} si no está contenido.
+
+
+\item \cm[black]{remove(item) : None}. Elimina y retorna la ocurrencia \cm[black]{item} del \textit{bag}. Lanza un error si el elemento no existe.
+
+
+\item \cm[black]{add(item) : None}. Modifica el \textit{bag} añadiendo  el elemento \cm[black]{item} al \textit{bag}.
+
+
+\item \cm[black]{iterator() : IteratorBag}: Crea y retorna un iterador para el \textit{bag}.
+\end{itemize}
+\end{definition}

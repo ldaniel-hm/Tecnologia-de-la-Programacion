@@ -1,0 +1,39 @@
+% !TEX root = ../EjercPracticas.tex
+
+\begin{definicion}[TDA Árbol Binario de Búsqueda]{}  \label{def:arbolBinarioBusqueda}
+Un \textbf{árbol binario de búsqueda} es un árbol binario que cumple la siguientes 2 propiedades:
+\begin{itemize}
+\item El valor del hijo izquierdo es menor que el valor de la raíz.
+\item El valor del hijo derecho es mayor que el valor de la raíz.
+\end{itemize}
+
+Por recursividad, se cumplirá que
+\begin{itemize}
+\item todos los descendiente de la rama izquierda son menores que el valor de la raíz.
+\item todos los descendiente de la rama derecha son mayores que el valor de la raíz.
+\end{itemize}
+
+
+\noindent Las especificaciones de algunos métodos propios de este TDA son:
+
+
+\begin{itemize}
+\item \cm[black]{TreeBinarySearch() : TreeBinarySearch}. Crea un nuevo árbol binario de búsqueda.
+
+\item \cm[black]{search(valor) : bool}. Indica si el valor se encuentra en el árbol.
+
+\item \cm[black]{add(valor) : None}. Añadir un elemento en el árbol. Los nuevos elemento se añaden siempre como nodos hojas. 
+
+\item \cm[black]{min() : valor}. Busca el valor mínimo de un árbol.
+
+\item \cm[black]{max() : valor}. Busca el valor máximo de un árbol.
+
+\item \cm[black]{remove(valor) : None}. Elimina el nodo que tiene un valor. El árbol resultante tiene que seguir siendo un árbol binario de búsqueda.
+\end{itemize}
+
+\
+
+Mira en la teoría cómo se deben implementar cada uno de los métodos.
+
+\end{definicion}
+

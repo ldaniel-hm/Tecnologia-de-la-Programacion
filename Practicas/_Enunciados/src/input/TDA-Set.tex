@@ -1,0 +1,47 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+\begin{definition}[Set]{}Un conjunto (set) representa a una colección de elementos no repetidos que no tienen un orden en particular.
+
+\begin{itemize}
+\item \cm[black]{Set() : Set}. Crea un nuevo conjunto, inicialmente vacío.
+
+\item \cm[black]{len() : int}. Retorna el número de elementos en el conjunto.
+
+Para una lista cualquiera $<a_0, a_1, \ldots, a_{n-1}>$ retornará el valor $n$.
+
+\item \cm[black]{contains(element) : bool}. Indica si el elemento \cm[black]{element} se encuentra en el conjunto. Retorna \cm{True} si está contenido y \cm{False} si no está contenido.
+
+
+\item \cm[black]{remove(element) : None}. Elimina el elemento \cm[black]{element} del conjunto. Lanza un error si el elemento no existe.
+
+
+\item \cm[black]{add(element) : None}. Modifica el conjunto añadiendo  el elemento \cm[black]{element} al conjunto.
+
+
+\item \cm[black]{equal(setB) : bool}. Determina si el conjunto es igual al conjunto dado. Dos conjuntos son iguales si ambos contienen el mismo número de elementos y todos los elementos del conjunto está en el conjunto B. Si ambos están vacíos entonces son iguales.
+
+
+\item \cm[black]{isSubsetOf(setB) : bool}. Determina si un conjunto es subconjunto del conjunto dado. 
+
+Un conjunto A es subconjunto de B si todos los elementos de A están en B.
+
+
+\item \cm[black]{union(setB) : Set}. Retorna un nuevo conjunto que es la unión del conjunto con el conjunto dado.
+
+La unión del conjunto A  con el conjunto de B es un nuevo conjunto que está formado por todos los elementos de A y todos los elementos de B que no están en A.
+
+
+\item \cm[black]{difference(setB) : Set}.  Retorna un nuevo conjunto que es la diferencia del conjunto con el conjunto dado.
+
+La diferencia del conjunto A  con el conjunto de B es un nuevo conjunto que está formado por todos los elementos de A que no están en B.
+
+
+\item \cm[black]{intersect() : Set}.  Retorna un nuevo conjunto que es la intersección del conjunto con el conjunto dado.
+
+La intersección del conjunto A  con el conjunto de B es un nuevo conjunto que está formado por todos los elementos que están en A y también en B.
+
+\item \cm[black]{iterator() : IteratorSet}: Crea y retorna un iterador para el conjunto.
+\end{itemize}
+\end{definition}
+

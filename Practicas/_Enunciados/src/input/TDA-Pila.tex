@@ -1,0 +1,35 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+
+\begin{definition}[Pila]{}\label{def:Pila}
+
+Una pila representa una lista de elementos que se rigen por el criterio LIFO.
+
+\begin{itemize}
+\item \cm[black]{Stack() : Stack}. Crea una nueva pila, inicialmente vacía.
+
+\item \cm[black]{peek() : value}. Retorna el valor del tope. También se suele usar la signatura \cm[black]{top() : value}.
+
+Para una pila  $<a_0, a_1, \ldots,>$ retornará el valor $a_0$.
+
+\item \cm[black]{pop() : value}. Retorna el valor del tope y además borra el primer nodo de la pila.
+
+Para una pila  $<a_0, a_1, a_2, \ldots,>$ retornará el valor $a_0$ y la nueva pila es  $<a_1, a_2, \ldots,>$.
+
+
+\item \cm[black]{push(value) : None}. Inserta un nuevo nodo en el tope de la lista. 
+
+Para una pila  $<a_0, a_1, a_2, \ldots,>$ y un valor $value$ la pila se modifica para conseguir la pila $<value, a_0, a_1, a_2, \ldots,>$.
+
+
+\item \cm[black]{len() : int}. Retorna el número de elementos de la pila.
+
+\item \cm[black]{isEmpty() : Bool}. Indica si la pila está vacía o no.
+
+\item \cm[black]{clear() : None}. Limpia la pila y la deja sin elementos.
+
+\end{itemize}
+\end{definition}
+
+

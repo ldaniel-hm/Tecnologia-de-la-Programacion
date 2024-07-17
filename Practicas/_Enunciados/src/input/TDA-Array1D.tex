@@ -1,0 +1,32 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+
+
+
+\begin{definition}[TDA Array 1D]{}\label{def:TDAArray1D}
+
+Un array 1-dimensional es una colección de elementos contiguos, todos del mismo tipo y donde cada elemento está identificado por un único entero no nulo. Una vez creado el array su tamaño no puede cambiarse pero su elementos sí.
+\begin{itemize}
+\item \cm[black]{Array1D(size) : Array1D}. Crea un array 1-dimensional que constará de \cm[black]{size}-elementos que se inicializarán a \cm[black]{None}. Se requiere que \cm[black]{size}$>0$.
+
+\item \cm[black]{length() : int}. Retorna la longitud o número de elementos en el array.
+
+\item \cm[black]{getItem(index) : value}. Retorna el elemento o valor almacenado en la posición \cm[black]{index}. El argumento para \cm[black]{index} debe tomar valores entre 0 y \cm[black]{length()-1}.
+
+Este método, en \cm[red]{Python} será invocado usando indexación. Ver ejercicio \ref{sec:datosIndexados}.
+
+\item \cm[black]{setItem(index, value) : None}. Sustituye el el \cm[black]{index}-ésimo valor del array por \cm[black]{value}. El argumento para \cm[black]{index} debe tomar valores entre 0 y \cm[black]{length()-1}.
+
+Este método, en \cm[red]{Python} será invocado usando indexación. Ver ejercicio \ref{sec:datosIndexados}.
+
+\item \cm[black]{clear(value) : None}. Limpia el array asignando a todas las posiciones el valor \cm[black]{value}.
+
+\item \cm[black]{iterator() : IteratorArray1D}: Crea y retorna un iterador para el array.
+
+Este método, en \cm[red]{Python} será definiendo el método \cm{\_\_iter\_\_()}. Ver ejercicio 
+\ref{sec:iteradorListas}
+\end{itemize}
+\end{definition}
+
+

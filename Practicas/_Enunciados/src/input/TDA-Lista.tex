@@ -1,0 +1,69 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+
+\begin{definition}[Lista]{}\label{def:Lista}
+
+Una lista representa una secuencia de elementos indexados que pueden aparecer repetidos.
+
+\begin{itemize}
+\item \cm[black]{List() : Lista}. Crea una nueva lista, inicialmente vacía.
+
+\item \cm[black]{len() : int}. Retorna la longitud o número de elementos en la lista.
+
+Para una lista cualquiera $<a_0, a_1, \ldots, a_{n-1}>$ retornará el valor $n$.
+
+\item \cm[black]{add(value) : None}. Añade un nuevo valor a la lista.
+
+\item \cm[black]{pop(value) : Value}. Retorna el primer valor \cm[black]{value} que aparezca en la lista, eliminando dicho valor de la lista.
+
+\item \cm[black]{peek(value) : int}. Retorna la posición donde aparezca el primer valor \cm[black]{value} que aparezca en la lista. El elemento no se elimina de la lista.
+
+\item \cm[black]{contains(value) : bool}. Indica si el valor \cm[black]{value} se encuentra na la lista.
+
+\item \cm[black]{getItem(pos) : value}. Retorna el elemento o valor almacenado en la posición \cm[black]{pos}. 
+
+Para una lista cualquiera $<a_0, \ldots, a_{pos}, \ldots, a_{n-1}>$ retornará el valor $a_{pos}$.
+
+
+\item \cm[black]{setItem(pos, value) : None}. Sustituye el \cm[black]{pos}-ésimo valor de la lista por \cm[black]{value}. 
+
+Para una lista cualquiera $<a_0, \ldots, a_{pos}, \ldots, a_{n-1}>$ se modificará la lista a la secuencia $<a_0, \ldots, value, \ldots, a_{n-1}>$.
+
+\item \cm[black]{insertItem(pos, value) : None}. Inserta el  \cm[black]{pos}-ésimo valor de la lista por \cm[black]{value}. 
+
+Para una lista cualquiera $<a_0, \ldots, a_{pos}, \ldots, a_{n-1}>$ se modificará la lista a la secuencia $<a_0, \ldots, value, a_{pos}, \ldots, a_{n-1}>$.
+
+
+\item \cm[black]{removeItem(pos) : None}. Elimina el elemento de la posición dada, si existe en la lista.
+
+Dada una lista cualquiera $<a_0, \ldots, a_{pos}, \ldots, a_{n-1}>$ se modificará la lista a la secuencia $<a_0, \ldots, a_{pos-1},a_{pos+1},\ldots, a_{n-1}>$.
+
+
+\item \cm[black]{clear() : None}. Limpia la lista. Se convierte en una lista vacía.
+
+Modifica cualquier lista a la lista  $<>$.
+
+\item \cm[black]{isEmpty() : bool}. Indica si la lista está vacía o no.
+
+\item \cm[black]{first() : pos}. Retorna la posición del primer elemento de la lista. Si la lista está vacía retornará  \cm[black]{last()}
+
+Dada una lista  $<a_0, \ldots, a_{pos}, \ldots, a_{n-1}>$ se retornará la posición donde se localiza $a_0$.
+
+\item \cm[black]{last() : pos}. Retorna la posición del último elemento de la lista. Si la lista está vacía retornará  \cm[black]{last()}
+
+Dada una lista  $<a_0, \ldots, a_{pos}, \ldots, a_{n-1}>$ se retornará la posición donde se localiza $a_{n-1}$.
+
+\item \cm[black]{next(pos) : pos}. Retorna la posición del elemento siguiente al elemento de la posición dada.
+
+Dada una lista retornará la posición donde se localiza el elemento $a_{pos+1}$.
+
+\item \cm[black]{previous(pos) : pos}. Retorna la posición del elemento anterior al elemento de la posición dada.
+
+Dada una lista retornará la posición donde se localiza el elemento $a_{pos-1}$.
+
+
+\item \cm[black]{iterator() : Lista}: Crea y retorna un iterador para la lista.
+\end{itemize}
+\end{definition}
+

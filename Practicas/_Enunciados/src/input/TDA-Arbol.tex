@@ -1,0 +1,78 @@
+% !TEX root = ../EjercPracticas.tex
+
+
+
+\begin{definition}[TDA Árbol]{}  \label{def:arbol}
+Un  árbol responde a la siguiente definición recursiva: 
+\begin{itemize}
+\item \textbf{Caso base:} El árbol vacío (sin elementos)
+\item \textbf{Caso recursivo:} Es una colección de datos que está formada por un dato y una lista de 0 o más árboles.
+\end{itemize}
+
+\noindent Las especificaciones informales de sus métodos son:
+% https://www.usna.edu/Users/cs/crabbe/SI321/current/treeADT/treeADT.html
+% Data Structures and Algorithms in Python.pdf página 305
+
+\begin{itemize}
+\item \cm[black]{Tree() : Tree}. Crea un nuevo árbol
+
+\item \cm[black]{append(value, node=pos) : None}. Añade un nuevo nodo al árbol con el valor  \cm[black]{value}. Si se especifica el segundo parámetro, el nuevo nodo será hijo de  \cm[black]{pos}.
+
+\item \cm[black]{value(pos) : type\_value}. Retorna el contenido del nodo (posición)  \cm[black]{pos}.
+
+\item \cm[black]{replace(pos, value) : value}. Cambia el valor del nodo de la posición \cm[black]{pos} por un nuevo valor (el de entrada) y retorna el antiguo valor.
+
+\item \cm[black]{remove(pos) : None}. Elimina el nodo de la posición \cm[black]{pos}.
+
+\item \cm[black]{parent(pos) : pos}. Retorna la posición del padre para la posición  \cm[black]{pos}.
+Será  \cm[black]{None} si la posición de entrada se corresponde con la raíz.
+
+\item \cm[black]{children(pos) : container}. Retorna un contenedor iterable con todos los hijos de  \cm[black]{pos}.
+
+\item \cm[black]{positions() : container}. Retorna un contenedor iterable con todos los nodos del árbol.
+
+\item \cm[black]{elements() : container}. Retorna un contenedor iterable con todos los valores del árbol.
+
+\item \cm[black]{num\_children(pos) : int}. Indica el número de hijos que tiene el nodo \cm[black]{pos}.
+
+\item \cm[black]{len() : int}. Retorna el número de elementos que tiene el grafo
+
+\item \cm[black]{depth(pos) : int}. Retorna la profundidad del nodo \cm[black]{pos}.
+
+\item \cm[black]{height(pos) : int}. Retorna la altura del nodo \cm[black]{pos}.
+
+\item \cm[black]{root() : pos}. Retorna la posición del nodo raíz del árbol. 
+
+\item \cm[black]{isRoot(pos) : Bool}. Retorna $True$ si la posición \cm[black]{pos} es el nodo raíz del árbol. Retorna $False$ en otro caso.
+
+\item \cm[black]{isInternal(pos) : Bool}. Retorna $True$ si la posición \cm[black]{pos} es el de un nodo interno. Retorna $False$ en otro caso.
+
+\item \cm[black]{isLeaf(pos) : Bool}. Retorna $True$ si  \cm[black]{pos} es un nodo hoja del árbol. Retorna $False$ en otro caso.
+
+\item \cm[black]{isEmpty() : Bool}. Indica si el árbol está vacío o no.
+\end{itemize}
+
+\end{definition}
+
+Se pueden ampliar con una gran cantidad de métodos como, por ejemplo:
+
+\begin{itemize}
+
+	
+\item \cm[black]{borrar(): None}. Borrar los nodos empezando por el nivel más profundo.
+
+\item \cm[black]{copiar() : TreeBinary}. Copiar un árbol empezando por la raíz.
+
+\item \cm[black]{contar(criterio) : int}. Contar el número de elementos que cumplan cierto criterio.
+
+\item \cm[black]{buscar(valor) : bool}.   Buscar un elemento en el árbol.
+
+\item \cm[black]{comparar(arbol) : bool}. Indica si el árbol dado coincide con el actual.
+
+\item \cm[black]{altura() : int}. Calcula la altura del árbol.
+
+\item \cm[black]{hojas() : int}. Calcula el número de hojas del árbol.
+
+\end{itemize}
+
+

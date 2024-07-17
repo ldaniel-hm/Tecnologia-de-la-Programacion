@@ -1,0 +1,84 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = xepythontex
+
+\documentclass[10pt, envcountsect, spanish]{beamer}
+
+
+\usepackage{pythontex}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{pycode}
+from lolviz import *
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+head = Node('A')
+#g=objviz(head) #, orientation="LR")  # RL
+g=callsviz(varnames=['head'])
+g.render("salida1",format="png")
+nuevo = Node('B')
+g=callsviz(varnames=['head', 'nuevo'])
+g.render("salida2",format="png")
+head.next = nuevo
+#g=objviz(nuevo)
+g=callsviz(varnames=['head', 'nuevo'], orientation="RL")
+g.render("salida3",format="png")
+head = nuevo
+#g=objviz(head)
+g=callsviz(varnames=['head', 'nuevo'])
+g.render("salida4",format="png")
+g.view()  # HAY QUE PONER ESTA INSTRUCCIÓN. SE GARANTICE QUE SE CREA TODO.
+\end{pycode}
+
+\end{document}
+
+% Generación de las transparencias para el código anterior.
+\begin{pycode}
+mycode = list()
+mycode.append("""
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        
+    def append(head: Node, nuevo: Node)
+        global nuevo
+        head.next = nuevo
+        nuevo = head
+
+Node head = Node('A')
+nuevo = Node('B')
+head.next = nuevo
+head = nuevo
+""")
+#
+#mycode.append(mycode[0] + """nuevo = Node('B')
+#""")
+lines = range(11, 15)
+for cont in range(1, 5):
+    s = '\\begin{frame}[fragile]{Frames Automaticos}'
+    s = s + '\\begin{columns}\\begin{column}{.6\\textwidth}\n'
+    s = s + '\\begin{pyverbatim}[][highlightlines=' + str(lines[cont-1]) + ', highlightcolor=yellow, frame=single]\n'
+    s = s + mycode[0] + '\n'  
+    s = s + '\\end{pyverbatim}\n\n'
+    s = s + '\\end{column}\\begin{column}{.4\\textwidth}'
+    s = s + '\n\n\\includegraphics[width=\\textwidth]{salida' + str(cont) + '}' + '\n'
+    s = s + '\\end{column}\\end{columns}\n'
+    #s = s + '\\includegraphics[height=.25\\textheight]{salida' + str(cont) + '}\n'
+    s = s + '\n\\end{frame}'
+    print(s)
+
+\end{pycode}
+
+
+\begin{frame}{final}
+\end{frame}
+\end{document}
